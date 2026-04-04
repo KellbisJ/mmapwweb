@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+main {
+  min-height: 100vh;
+}
+/* .node_colors {
+  #c4e1f6;
+  86A7FC;
+} */
+.header {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: 64px;
+  align-items: center;
+  padding: 0 10px 0 10px;
+  background-color: #f3f4f4;
+  position: relative;
+  border-radius: 1px;
+  border: 1px solid #f39189;
+}
+.exportMmapOptions {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  border: 1px solid #3d23cf;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+.btn_header {
+  color: #f3f4f4;
+  border: none;
+  background-color: #44444e;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.mindmap_core {
+  display: flex;
+  /* gap: 12px; */
+  min-height: 100vh;
+}
+.side_left_bar {
+  flex: 1 1 0;
+  background-color: #f3f4f4;
+  padding: 20px;
+  border-radius: 1px;
+  border: 1px solid #f39189;
+  border-top: 0;
+}
+.mindmap_nodes {
+  flex: 20 1 0;
+  /* padding: 12px; */
+  /* margin: 12px; */
+  position: relative;
+  overflow-x: auto;
+  /* border-radius: 2px;
+  border: 2px solid #f39189; */
+  width: 100%;
+}
+#mMapCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.node {
+  position: relative;
+  padding: 12px;
+  border-radius: 12px;
+  width: 160px;
+  height: 60px;
+  background: #91d06c;
+  position: absolute;
+  text-align: center;
+  color: #f3f4f4;
+}
+.branch {
+  position: absolute;
+  border: 4px solid rgb(155, 26, 26);
+  top: 0;
+  left: 50%;
+}
+.core_node {
+  background: #52357b;
+  top: 1%;
+  left: 50%;
+}

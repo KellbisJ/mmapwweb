@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
+    <title>MMapWWeb</title>
+  </head>
+  <body>
+    <main>
+      <header class="header">
+        <div class="exportMmapOptions">
+          <button id="exportPng" class="btn_header" type="button">Export PNG</button>
+          <button id="exportPdf" class="btn_header" type="button">Export PDF</button>
+        </div>
+        <div class="nodeOptions">
+          <button id="addNode" class="btn_header add_node_btn" type="button">+ Add Node</button>
+        </div>
+      </header>
+
+      <div class="mindmap_core">
+        <div class="side_left_bar">
+          <div>Tool 1</div>
+          <div>Tool 2</div>
+          <div>Tool 3</div>
+          <div>Tool 4</div>
+          <div>Tool 5</div>
+        </div>
+
+        <div id="dropeableZone" class="mindmap_nodes">
+          <canvas id="mMapCanvas"></canvas>
+          <div id="initialNode" class="node core_node">
+            <button class="btn-node">...</button>
+            Main Idea
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="/index.js"></script>
+  </body>
+</html>

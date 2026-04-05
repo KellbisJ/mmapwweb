@@ -79,7 +79,7 @@ main {
   border-radius: 12px;
   width: 160px;
   height: 60px;
-  background: #91d06c;
+
   position: absolute;
   text-align: center;
   color: #f3f4f4;
@@ -91,7 +91,8 @@ main {
   left: 50%;
 }
 .core_node {
-  background: #52357b;
-  top: 1%;
-  left: 50%;
+  background-color: #52357b;
+}
+.child_node {
+  background-color: #91d06c;
 }

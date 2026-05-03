@@ -7,7 +7,8 @@ const btnAddNode = document.getElementById("addNode");
 const node = nodeCreator.createNode("CoreNode", { x: "50%", y: "10%" });
 const btnMenuNode = node.querySelector(".btn-node");
 
-nodeHandler.appendNodeToDragZoneContainer(nodesContainer, node);
+nodeHandler.appendNodeToDragZoneContainer(nodesContainer, node); // set a first default node
+
 nodeHandler.dragNode(node, nodesContainer);
 nodeHandler.showNodeMethodsMenu(node, nodeCreator, nodesContainer, btnMenuNode);
 

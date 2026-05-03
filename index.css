@@ -8,11 +8,10 @@ html {
 }
 main {
   min-height: 100vh;
+  background-color: #0c0e12;
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
 }
-/* .node_colors {
-  #c4e1f6;
-  86A7FC;
-} */
 .header {
   display: flex;
   gap: 16px;
@@ -20,50 +19,57 @@ main {
   height: 64px;
   align-items: center;
   padding: 0 10px 0 10px;
-  background-color: #f3f4f4;
+  background-color: #16181d;
   position: relative;
-  border-radius: 1px;
-  border: 1px solid #f39189;
+  border-radius: 8px;
+  border: none;
 }
 .exportMmapOptions {
   display: flex;
   justify-content: center;
   height: 100%;
-  border: 1px solid #3d23cf;
-  border-top: 0;
-  border-bottom: 0;
-  border-left: 0;
+  border: none;
 }
 .btn_header {
-  color: #f3f4f4;
+  color: #f0f3f8;
   border: none;
-  background-color: #44444e;
-  padding: 12px;
-  border-radius: 6px;
+  background-color: #3b82f6;
+  padding: 12px 16px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.btn_header:hover {
+  background-color: #60a5fa;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
 }
 .mindmap_core {
   display: flex;
-  /* gap: 12px; */
   min-height: 100vh;
 }
 .side_left_bar {
   flex: 1 1 0;
-  background-color: #f3f4f4;
-  padding: 20px;
-  border-radius: 1px;
-  border: 1px solid #f39189;
-  border-top: 0;
+  background-color: #16181d;
+  padding: 24px;
+  border-radius: 12px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.side_left_bar div {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #a0a6b2;
 }
 .mindmap_nodes {
   flex: 20 1 0;
-  /* padding: 12px; */
-  /* margin: 12px; */
   position: relative;
   overflow-x: auto;
-  /* border-radius: 2px;
-  border: 2px solid #f39189; */
   width: 100%;
+  padding: 32px;
 }
 #mMapCanvas {
   position: absolute;
@@ -75,24 +81,30 @@ main {
 }
 .node {
   position: relative;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 8px;
   width: 160px;
   height: 60px;
-
   position: absolute;
   text-align: center;
-  color: #f3f4f4;
+  color: #f0f3f8;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  box-shadow: -2px 2px 4px 0px rgba(0, 0, 0, 0.4);
+}
+.node:hover {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
 }
 .branch {
   position: absolute;
-  border: 4px solid rgb(155, 26, 26);
+  border: 4px solid #ff3366;
   top: 0;
   left: 50%;
 }
 .core_node {
-  background-color: #52357b;
+  background-color: #b026ff;
 }
 .child_node {
-  background-color: #91d06c;
+  background-color: #35a29f;
 }

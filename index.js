@@ -1,15 +1,14 @@
-import { nodeCreator, nodeHandler } from "./lib/main.js";
-import { addCoreNodesToNodesContainer } from "./lib/add-node.js";
+import { NodeGraph } from "./lib/NodeGraph.js";
 
-const nodesContainer = document.getElementById("dropeableZone");
-const btnAddNode = document.getElementById("addNode");
+document.addEventListener("DOMContentLoaded", () => {
+  const graph = new NodeGraph("dragZone");
 
-const node = nodeCreator.createNode("CoreNode", { x: "50%", y: "10%" });
-const btnMenuNode = node.querySelector(".btn-node");
+  graph.createNode("Main Idea");
 
-nodeHandler.appendNodeToDragZoneContainer(nodesContainer, node); // set a first default node
-
-nodeHandler.dragNode(node, nodesContainer);
-nodeHandler.showNodeMethodsMenu(node, nodeCreator, nodesContainer, btnMenuNode);
-
-btnAddNode.addEventListener("click", addCoreNodesToNodesContainer);
+  const addBtn = document.getElementById("addNode");
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      graph.createNode("Node");
+    });
+  }
+});

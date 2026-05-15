@@ -12,6 +12,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "dompurify": "^3.4.3",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1"
   },

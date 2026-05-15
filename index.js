@@ -16,7 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.getElementById("exportPng").addEventListener("click", async () => {
-    const canvas = await html2canvas(graph.container);
+    const container = graph.container;
+
+    const canvas = await html2canvas(container, {
+      useCORS: true,
+      allowTaint: true,
+      scale: 2,
+      backgroundColor: null,
+      logging: false,
+      ignoreBackground: false,
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: container.scrollWidth,
+      windowHeight: container.scrollHeight,
+      foreignObjectRendering: true,
+    });
     const dataURL = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.href = dataURL;
@@ -27,14 +41,59 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("exportPdf").addEventListener("click", async () => {
-    const canvas = await html2canvas(graph.container);
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF();
+    const container = graph.container;
 
-    // Add the image to the PDF
-    pdf.addImage(imgData, "PNG", 0, 0);
+    const canvas = await html2canvas(container, {
+      useCORS: true,
+      scale: 2,
+      backgroundColor: "#0c0e12",
+      logging: false,
+      foreignObjectRendering: true,
+      windowWidth: container.scrollWidth,
+      windowHeight: container.scrollHeight,
+    });
 
-    // Save the PDF file
+    const imgData = canvas.toDataURL("image/jpeg");
+
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+    const aspectRatio = imgWidth / imgHeight;
+
+    const PDF_WIDTH = 595;
+    const PDF_HEIGHT = 842;
+
+    let finalPdfWidth = PDF_WIDTH;
+    let finalPdfHeight = PDF_HEIGHT;
+    let orientation = "portrait";
+
+    if (aspectRatio > 1) {
+      orientation = "landscape";
+      finalPdfWidth = PDF_HEIGHT;
+      finalPdfHeight = PDF_WIDTH;
+    }
+
+    const margin = 12;
+    const availableWidth = finalPdfWidth - margin * 2;
+    const availableHeight = finalPdfHeight - margin * 2;
+
+    let renderWidth = availableWidth;
+    let renderHeight = (imgHeight / imgWidth) * renderWidth;
+
+    if (renderHeight > availableHeight) {
+      renderHeight = availableHeight;
+      renderWidth = (imgWidth / imgHeight) * renderHeight;
+    }
+
+    const pdf = new jsPDF({
+      orientation: orientation,
+      unit: "pt",
+      format: [finalPdfWidth, finalPdfHeight],
+    });
+
+    const xOffset = (finalPdfWidth - renderWidth) / 2;
+    const yOffset = (finalPdfHeight - renderHeight) / 2;
+
+    pdf.addImage(imgData, "JPEG", xOffset, yOffset, renderWidth, renderHeight);
     pdf.save("mindmap.pdf");
   });
 });

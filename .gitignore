@@ -164,6 +164,6 @@ dist
 .continue/
 
 ### personal notes
-/notes.md
+/notes
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode

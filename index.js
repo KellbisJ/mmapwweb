@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const graph = new NodeGraph("dragZone");
 
   graph.headerDraggable();
+  // graph.createNode("Main Idea", null, { x: 50, y: 100 });
   graph.createNode("Main Idea");
 
   const addBtn = document.getElementById("addNode");

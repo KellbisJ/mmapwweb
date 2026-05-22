@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const graph = new NodeGraph("dragZone");
 
   graph.headerDraggable();
-  // graph.createNode("Main Idea", null, { x: 50, y: 100 });
   graph.createNode("Main Idea");
 
   const addBtn = document.getElementById("addNode");
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       useCORS: true,
       allowTaint: true,
       scale: 2,
-      backgroundColor: null,
+      backgroundColor: "#0c0e12",
       logging: false,
       ignoreBackground: false,
       scrollX: 0,
@@ -32,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       windowHeight: container.scrollHeight,
       foreignObjectRendering: true,
     });
+
     const dataURL = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.href = dataURL;

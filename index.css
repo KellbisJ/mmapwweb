@@ -96,6 +96,7 @@ main {
 .node_header {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 8px;
 }
 .node:hover {
@@ -132,7 +133,8 @@ main {
 }
 
 .add_child_btn,
-.delete_node_btn {
+.delete_node_btn,
+.add_image_btn {
   border-radius: 8px;
   border: none;
   font-size: 1rem;
@@ -147,6 +149,9 @@ main {
 }
 .delete_node_btn {
   background-color: #c63c51;
+}
+.add_image_btn {
+  background-color: #bebebe;
 }
 .node:hover .node_menu,
 .node:hover .add_child_btn,

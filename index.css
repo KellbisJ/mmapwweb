@@ -102,7 +102,7 @@ main {
 .node:hover {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
 }
-.contenteditable-text {
+.contenteditable_text {
   color: #f0f3f8;
   white-space: pre-wrap;
   word-break: break-word;
@@ -111,7 +111,7 @@ main {
   padding: 2px;
   cursor: pointer;
 }
-.contenteditable-text:focus {
+.contenteditable_text:focus {
   outline: none;
   background-color: #44444e21;
   border-radius: 2px;
@@ -129,6 +129,7 @@ main {
 }
 .node:hover .node_menu {
   display: flex;
+  justify-content: space-between;
   gap: 8px;
 }
 
@@ -137,11 +138,18 @@ main {
 .add_image_btn {
   border-radius: 8px;
   border: none;
-  font-size: 1rem;
   cursor: pointer;
-  padding: 6px 14px;
-  margin-right: -2px;
+  padding: 6px 16px;
+  margin-top: 2px;
   color: #f0f3f8;
+}
+.feather-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-right: 5px; */
+  width: 16px;
+  height: 16px;
 }
 
 .add_child_btn {
@@ -216,23 +224,27 @@ main {
     letter-spacing: normal;
   }
   .add_child_btn,
-  .delete_node_btn {
+  .delete_node_btn,
+  .add_image_btn {
     border-radius: 8px;
     border: none;
     font-size: 0.5rem;
     cursor: pointer;
-    padding: 4px 12px;
-    margin-right: -2px;
+    padding: 6px 8px;
     color: #f0f3f8;
+  }
+  .feather-icon {
+    width: 12px;
+    height: 12px;
   }
   .header:hover .exportMmapOptions,
   .header:hover .nodeOptions {
     box-shadow: none;
   }
-  .contenteditable-text {
+  .contenteditable_text {
     user-select: text;
   }
-  .contenteditable-text:focus {
+  .contenteditable_text:focus {
     outline: none;
     background-color: #44444e21;
     border-radius: 2px;

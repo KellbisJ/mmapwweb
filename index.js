@@ -1,7 +1,5 @@
 import { NodeGraph } from "./lib/NodeGraph.js";
 import { HeaderManager } from "./lib/Header.js";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
 
 const container = document.getElementById("dragZone");
 

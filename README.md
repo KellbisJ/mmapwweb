@@ -8,6 +8,16 @@ A lightweight, browser-based mind mapping tool designed for brainstorming and or
 
 MMapWWeb was born out of boredom during university studies! I needed a tool to generate an initial idea for my mind map assignment. I decided I wanted something simple that let me focus on _my_ ideas and I created this simple mind map web project.
 
+### Key Technologies
+
+- **Frontend**: Vanilla JavaScript (ES6+ modules), CSS3
+- **Rendering**: HTML Canvas API (for background effects)
+- **Dependencies**:
+  - `feather-icons` - Icon library for UI elements
+  - `dompurify` - HTML sanitization
+  - `html2canvas` - Canvas-to-image conversion
+  - `jspdf` - PDF generation
+
 ## License
 
 Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.

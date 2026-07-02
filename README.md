@@ -8,6 +8,26 @@ A lightweight, browser-based mind mapping tool designed for brainstorming and or
 
 MMapWWeb was born out of boredom during university studies! I needed a tool to generate an initial idea for my mind map assignment. I decided I wanted something simple that let me focus on _my_ ideas and I created this simple mind map web project.
 
+### Installation
+
+```bash
+# Install dependencies
+pnpm install
+```
+
+### Development
+
+```bash
+# Start development server with hot-reload
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
 ### Key Technologies
 
 - **Frontend**: Vanilla JavaScript (ES6+ modules), CSS3

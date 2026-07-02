@@ -24,9 +24,23 @@
 
   /* === ACTION COLORS === */
   --color-action-add: #35a29f;
+  --color-action-add-hover: #2d8a87;
   --color-action-delete: #c63c51;
+  --color-action-delete-hover: #a83245;
   --color-action-neutral: #bebebe;
+  --color-action-neutral-hover: #a0a0a0;
   --color-action-accent: #ff3366;
+
+  /* === NODE MENU PIE COLORS === */
+  --color-pie-bg: #1a1c23f2;
+  --color-pie-border: #ffffff26;
+  --color-pie-shadow: #00000080;
+  --color-pie-btn-add: #35a29f;
+  --color-pie-btn-add-hover: #2d8a87;
+  --color-pie-btn-delete: #c63c51;
+  --color-pie-btn-delete-hover: #a83245;
+  --color-pie-btn-image: #bebebe;
+  --color-pie-btn-image-hover: #a0a0a0;
 
   /* === BORDER & DIVIDER COLORS === */
   --color-border-subtle: #ffffff14;
@@ -213,16 +227,48 @@ main {
 
 .node {
   padding: 16px;
-  border-radius: 12px;
+  border-radius: 16px;
   width: 180px;
   height: auto;
   position: absolute;
   text-align: center;
   color: var(--color-text-primary);
   font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: normal;
+  font-weight: 500;
+  letter-spacing: 0.3px;
   z-index: 3;
+  background-color: var(--color-bg-overlay-heavy);
+  border: 1px solid var(--color-border-medium);
+  /* box-shadow:
+    0 4px 12px var(--color-shadow-light),
+    0 2px 4px var(--color-shadow-light),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05); */
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: visible;
+  cursor: pointer;
+}
+
+.node:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px var(--color-shadow-medium),
+    0 4px 8px var(--color-shadow-light),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: var(--color-border-hover);
+}
+
+.node.selected {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 3px var(--color-primary-shadow),
+    0 8px 24px var(--color-shadow-medium),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .node_header {
@@ -230,6 +276,8 @@ main {
   align-items: center;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 .contenteditable_text {
@@ -238,43 +286,204 @@ main {
   word-break: break-word;
   overflow: hidden;
   width: 100%;
-  padding: 2px;
+  padding: 4px 8px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenteditable_text:hover {
+  background-color: var(--color-bg-subtle);
 }
 
 .contenteditable_text:focus {
   outline: none;
   background-color: var(--color-bg-focus);
-  border-radius: 2px;
 }
 
 .node_menu {
   position: absolute;
-  top: 100%;
   left: 50%;
+  top: -105px;
   transform: translateX(-50%);
   display: none;
-  background-color: var(--color-bg-node-menu);
-  border-radius: 4px;
-  box-shadow: 0 2px 8px var(--color-shadow-light);
-  z-index: 10;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }
 
-.node:hover .node_menu {
+.node.selected .node_menu {
+  display: block;
+  pointer-events: auto;
+  opacity: 1;
+  animation: dpadMenuOpen 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes dpadMenuOpen {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes dpadMenuClose {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+  }
+}
+
+.node_menu.closing {
+  animation: dpadMenuClose 0.2s ease-in forwards;
+}
+
+.dpad_menu_container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.dpad_button {
+  position: absolute;
+  width: 44px;
+  height: 44px;
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.add_child_btn,
-.delete_node_btn,
-.add_image_btn {
-  border-radius: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
   border: none;
   cursor: pointer;
-  padding: 6px 16px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.dpad_button:hover::before {
+  opacity: 1;
+}
+
+.dpad_button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dpad_button:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.dpad_button .feather-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.dpad_button span {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--color-text-white);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   margin-top: 2px;
-  color: var(--color-text-primary);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.dpad_up {
+  top: -20px;
+  left: 50%;
+}
+
+.dpad_right {
+  right: -64px;
+  top: 50%;
+}
+
+.dpad_down {
+  bottom: -60px;
+  left: 50%;
+}
+
+.dpad_left {
+  left: -20px;
+  top: 50%;
+}
+
+/* Button styling */
+.dpad_button--add {
+  background: linear-gradient(135deg, #35a29f, #2d8a87);
+  border-color: rgba(53, 162, 159, 0.5);
+  color: #ffffff;
+}
+.dpad_button--add:hover {
+  background: linear-gradient(135deg, #3bb8b5, #35a29f);
+  box-shadow: 0 8px 24px rgba(53, 162, 159, 0.5);
+}
+
+.dpad_button--delete {
+  background: linear-gradient(135deg, #c63c51, #a83245);
+  border-color: rgba(198, 60, 81, 0.5);
+  color: #ffffff;
+}
+.dpad_button--delete:hover {
+  background: linear-gradient(135deg, #d94d63, #c63c51);
+  box-shadow: 0 8px 24px rgba(198, 60, 81, 0.5);
+}
+
+.dpad_button--image {
+  background: linear-gradient(135deg, #bebebe, #a0a0a0);
+  border-color: rgba(190, 190, 190, 0.4);
+  color: #1a1c23;
+}
+.dpad_button--image:hover {
+  background: linear-gradient(135deg, #d0d0d0, #bebebe);
+  box-shadow: 0 8px 24px rgba(190, 190, 190, 0.5);
+}
+.dpad_button--image .feather-icon {
+  color: #1a1c23;
+}
+.dpad_button--image span {
+  color: #1a1c23;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.dpad_button--color {
+  background: linear-gradient(135deg, #6c4ca2, #5a3a8a);
+  color: #ffffff;
+}
+.dpad_button--color:hover {
+  background: linear-gradient(135deg, #7d5db3, #6c4ca2);
+}
+.dpad_button--color .feather-icon,
+.dpad_button--color span {
+  color: #ffffff;
+}
+
+/* D-Pad center styling */
+.dpad_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 2px solid var(--color-border-medium);
+  backdrop-filter: blur(10px);
 }
 
 .feather-icon {
@@ -283,24 +492,6 @@ main {
   align-items: center;
   width: 16px;
   height: 16px;
-}
-
-.add_child_btn {
-  background-color: var(--color-action-add);
-}
-
-.delete_node_btn {
-  background-color: var(--color-action-delete);
-}
-
-.add_image_btn {
-  background-color: var(--color-action-neutral);
-}
-
-.node:hover .node_menu,
-.node:hover .add_child_btn,
-.node:hover .delete_node_btn {
-  opacity: 0.9;
 }
 
 .branch {
@@ -361,18 +552,45 @@ main {
   }
 
   .node {
-    padding: 6px;
-    border-radius: 6px;
-    width: 120px;
+    padding: 12px;
+    border-radius: 12px;
+    width: 140px;
     position: absolute;
     text-align: center;
     color: var(--color-text-primary);
-    font-size: 0.7rem;
-    font-weight: 400;
+    font-size: 0.85rem;
+    font-weight: 500;
     letter-spacing: normal;
   }
 
+  .node.selected {
+    transform: translateY(-1px);
+  }
+
   .feather-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .dpad_button {
+    width: 36px;
+    height: 36px;
+  }
+  .dpad_right {
+    right: -60px;
+    top: 50%;
+  }
+
+  .dpad_button .feather-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .dpad_button span {
+    font-size: 8px;
+  }
+
+  .dpad_center {
     width: 12px;
     height: 12px;
   }
@@ -415,6 +633,47 @@ main {
     width: 12px;
     height: 12px;
   }
+
+  .node {
+    padding: 10px;
+    width: 120px;
+  }
+  .node_menu {
+    top: -85px;
+  }
+
+  .dpad_button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dpad_up {
+    top: -10px;
+    left: 50%;
+  }
+
+  .dpad_right {
+    right: -40px;
+    top: 50%;
+  }
+
+  .dpad_down {
+    bottom: -40px;
+    left: 50%;
+  }
+
+  .dpad_left {
+    left: -10px;
+    top: 50%;
+  }
+  .dpad_button .feather-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .dpad_button span {
+    font-size: 7px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -426,5 +685,48 @@ main {
   .feather-icon {
     width: 10px;
     height: 10px;
+  }
+
+  .node {
+    padding: 8px;
+    width: 100px;
+    font-size: 0.75rem;
+  }
+  .node_menu {
+    top: -75px;
+  }
+
+  .dpad_button {
+    width: 24px;
+    height: 24px;
+  }
+
+  .dpad_button .feather-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dpad_button span {
+    display: none;
+  }
+
+  .dpad_up {
+    top: -5px;
+    left: 50%;
+  }
+
+  .dpad_right {
+    right: -30px;
+    top: 50%;
+  }
+
+  .dpad_down {
+    bottom: -30px;
+    left: 50%;
+  }
+
+  .dpad_left {
+    left: -5px;
+    top: 50%;
   }
 }

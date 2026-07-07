@@ -126,7 +126,7 @@ main {
 
 .btn_header:hover {
   background-color: var(--color-bg-hover);
-  transform: translateY(-1px);
+  /* transform: translateY(-1px); */
 }
 
 .header .primary {
@@ -544,6 +544,7 @@ main {
     top: auto;
     right: auto;
     min-width: 140px;
+    z-index: 1000;
   }
 
   .node {
